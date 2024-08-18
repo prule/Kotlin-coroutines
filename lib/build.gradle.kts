@@ -6,12 +6,27 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 
+import org.asciidoctor.gradle.jvm.AsciidoctorTask
+
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     alias(libs.plugins.jvm)
 
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
+
+    // asciidoctor plugin for documentation
+    id("org.asciidoctor.jvm.convert") version "4.0.3"
+    id("org.asciidoctor.jvm.pdf") version "4.0.3"
+    id("org.asciidoctor.jvm.base") version "4.0.3"
+}
+
+tasks {
+    "asciidoctor"(AsciidoctorTask::class) {
+//        baseDirIsProjectDir()
+//        baseDirIsRootProjectDir()
+        baseDirFollowsSourceDir()
+    }
 }
 
 repositories {
@@ -25,6 +40,8 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation(libs.guava)
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0-RC.2")
 }
 
 testing {
@@ -32,7 +49,7 @@ testing {
         // Configure the built-in test suite
         val test by getting(JvmTestSuite::class) {
             // Use Kotlin Test test framework
-            useKotlinTest("1.9.22")
+            useKotlinTest(libs.versions.kotlin)
         }
     }
 }

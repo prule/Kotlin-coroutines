@@ -4,10 +4,11 @@
 [versions]
 commons-math3 = "3.6.1"
 guava = "33.0.0-jre"
+kotlin = "1.9.22"
 
 [libraries]
 commons-math3 = { module = "org.apache.commons:commons-math3", version.ref = "commons-math3" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 
 [plugins]
-jvm = { id = "org.jetbrains.kotlin.jvm", version = "1.9.22" }
+jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
